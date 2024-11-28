@@ -22,8 +22,15 @@ public class Player : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-
         Vector3 direction = new Vector3(horizontal, 0f, vertical);
+
+        ySpeed+=Physics.gravity.y * Time.deltaTime;
+        if(Input.GetButtonDown("Jump")) {
+            Debug.Log("Jump");
+            ySpeed=jumpSpeed;
+            // vel.y=ySpeed;
+        }
+
 
         if(direction.magnitude >= 0.1f) {
 
@@ -31,19 +38,11 @@ public class Player : MonoBehaviour
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothVelocity);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
             animator.SetBool("isMoving", true);
-            controller.Move(direction*speed*Time.deltaTime);
-        }
-        animator.SetBool("isMoving", false);
-
-    ySpeed+=Physics.gravity.y * Time.deltaTime;
-        if(Input.GetButtonDown("Jump")) {
-            Debug.Log("Jump");
-            ySpeed=-0.5f; 
+            Debug.Log("Walking");
+        } else {
+            animator.SetBool("isMoving", false);
         }
 
-        Vector3 vel =direction * speed;
-        vel.y=ySpeed;
-        controller.Move(direction*Time.deltaTime);
-
+            controller.SimpleMove(direction*speed*Time.deltaTime);
     }
 }
