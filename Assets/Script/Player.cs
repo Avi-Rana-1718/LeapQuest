@@ -8,8 +8,8 @@ public class Player : MonoBehaviour
     public Animator animator; // Reference to the Animator
 
     public float speed = 6f; // Movement speed
-    public float jumpSpeed = 9f; // Initial upward speed during jump
-    public float gravity = -9.81f; // Gravity value
+    public float jumpSpeed = 4f; // Initial upward speed during jump
+    public float gravity = -100.81f; // Gravity value
     public float turnSmoothTime = 0.1f; // Smooth turning time
     private float turnSmoothVelocity; // Reference velocity for SmoothDamp
     private float ySpeed = 0f; // Current vertical speed
@@ -35,8 +35,9 @@ public class Player : MonoBehaviour
             if (Input.GetButtonDown("Jump"))
             {
                 animator.SetBool("isJumping", true);
-                Debug.Log("Jump");
                 ySpeed = jumpSpeed;
+            } else {
+                animator.SetBool("isJumping", false);
             }
         }
         else
@@ -56,8 +57,6 @@ public class Player : MonoBehaviour
 
             // Set walking animation
             animator.SetBool("isMoving", true);
-            animator.SetBool("isJumping", false);
-            Debug.Log("Walking");
         }
         else
         {
