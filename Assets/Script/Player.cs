@@ -12,8 +12,13 @@ public class Player : MonoBehaviour
     public float gravity = -100.81f; // Gravity value
     public float turnSmoothTime = 0.1f; // Smooth turning time
     private float turnSmoothVelocity; // Reference velocity for SmoothDamp
-    private float ySpeed = 0f; // Current vertical speed
+    public float ySpeed = 0f; // Current vertical speed
     private Vector3 velocity; // Combined movement velocity
+    public float coyoteTime =0.2f;
+    public float? lastGroundedTime;
+    private float? jumpButtonPressTime;
+
+
 
     void Start()
     {
@@ -26,16 +31,26 @@ public class Player : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical);
 
-        if (controller.isGrounded)
+        if(controller.isGrounded) {
+            lastGroundedTime = Time.time;
+        }
+
+        if(Input.GetButtonDown("Jump")) {
+            jumpButtonPressTime=Time.time;
+        }
+
+        if (Time.time - lastGroundedTime <= coyoteTime)
         {
             // Reset vertical speed when grounded
             ySpeed = -0.5f;
 
             // Check for jump input
-            if (Input.GetButtonDown("Jump"))
+            if (Time.time - jumpButtonPressTime <= coyoteTime)
             {
                 animator.SetBool("isJumping", true);
                 ySpeed = jumpSpeed;
+                jumpButtonPressTime=null;
+                lastGroundedTime=null;
             } else {
                 animator.SetBool("isJumping", false);
             }
