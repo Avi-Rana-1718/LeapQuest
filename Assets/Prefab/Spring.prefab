@@ -196,7 +196,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2377774999301496146}
-  - component: {fileID: 4792384507750726750}
   - component: {fileID: 4854913293377304682}
   m_Layer: 0
   m_Name: Bouncer
@@ -222,19 +221,6 @@ Transform:
   - {fileID: 4510044124254439122}
   m_Father: {fileID: 1305342651533518195}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4792384507750726750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8406789029794533473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25e5d619fad1e9a488409b739afb0393, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bounceForce: 20
 --- !u!65 &4854913293377304682
 BoxCollider:
   m_ObjectHideFlags: 0
